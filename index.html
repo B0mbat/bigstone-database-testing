@@ -344,29 +344,29 @@
         </div>
 
         <script>
-          async function loadProjects() {
-  const url = 'https://bigstone-api.justparrot.workers.dev/projects/';
+            async function loadProjects() {
+                const url = 'https://bigstone-api.justparrot.workers.dev/projects/';
 
-  try {
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const projectsData = await response.json();
-    
-    console.log("Data loaded successfully:", projectsData);
-    
-    displayProjects(projectsData);
+                try {
+                    const response = await fetch(url);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const projectsData = await response.json();
+                    
+                    console.log("Data loaded successfully:", projectsData);
+                    
+                    displayProjects(projectsData);
 
-  } catch (error) {
-    console.error("Could not fetch projects:", error);
-  }
-}
-loadProjects();
+                } catch (error) {
+                    console.error("Could not fetch projects:", error);
+                }
+            }
+
             const fallbackGif = "img_fallback.gif";
 
-            function loadProjects() {
+            function displayProjects(projectsData) {
                 const grid = document.querySelector("#grid");
                 grid.innerHTML = "";
 
@@ -375,7 +375,7 @@ loadProjects();
                     card.className = "card uk-card uk-card-default";
                     card.dataset.name = project.name.toLowerCase();
 
-                   const imgPath = project.banner_url || fallbackGif;
+                    const imgPath = project.banner_url || fallbackGif;
                     const downloadUrl = `https://bigstone-api.justparrot.workers.dev/projects/${project.id}/download`;
 
                     card.addEventListener('click', function() {
@@ -385,11 +385,11 @@ loadProjects();
                     const words = project.desc.split(" ");
                     const snippet = words.slice(0, 5).join(" ") + "...";
 
-             card.innerHTML = `
-            <img src="${imgPath}" alt="${project.name}" onerror="this.onerror=null; this.src='${fallbackGif}';" />
-            <h3 class="uk-card-title">${project.name}</h3>
-            <p>${snippet}</p>
-        `;
+                    card.innerHTML = `
+                        <img src="${imgPath}" alt="${project.name}" onerror="this.onerror=null; this.src='${fallbackGif}';" />
+                        <h3 class="uk-card-title">${project.name}</h3>
+                        <p>${snippet}</p>
+                    `;
                     
                     grid.appendChild(card);
                 });
@@ -399,11 +399,11 @@ loadProjects();
                 document.querySelector("#m-title").textContent = title;
                 document.querySelector("#m-desc").textContent = description;
                 const modalImg = document.querySelector("#m-img");
-    modalImg.src = imageUrl;
-    modalImg.onerror = function() {
-        this.onerror = null;
-        this.src = fallbackGif;
-    };
+                modalImg.src = imageUrl;
+                modalImg.onerror = function() {
+                    this.onerror = null;
+                    this.src = fallbackGif;
+                };
                 document.querySelector("#m-download").href = downloadLink;
 
                 const tagsContainer = document.querySelector("#m-tags");
