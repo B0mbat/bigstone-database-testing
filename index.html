@@ -382,7 +382,7 @@
                         openModal(project.name, project.desc, project.owner_id, imgPath, downloadUrl);
                     });
 
-                    const words = project.desc.split(" ");
+                    const words = project.desc ? project.desc.split(" ") : ["No", "description"];
                     const snippet = words.slice(0, 5).join(" ") + "...";
 
                     card.innerHTML = `
